@@ -1,54 +1,93 @@
-// Environment configuration loader
-import { readFileSync } from 'fs';
+// Commit Commander configuration loader
+import { existsSync } from 'fs';
 import { join } from 'path';
 
-interface EnvironmentConfig {
-    GEMINI_API_KEY: string;
+interface CommitCommanderConfig {
+    apiKey: string;
+    commitTypes: string[];
+    scopeTypes: string[];
+    customPrompt?: string;
+    customQuestions?: {
+        askForDetails: boolean;
+        detailsPrompt: string;
+        confirmBeforeCommit: boolean;
+    };
 }
 
-function loadEnvironmentConfig(): EnvironmentConfig {
+async function loadConfig(): Promise<CommitCommanderConfig> {
+    const configPath = join(process.cwd(), 'commit-commander.config.js');
+
     try {
-        // First try to read from .env file
-        const envPath = join(process.cwd(), '.env');
-        const envFile = readFileSync(envPath, 'utf8');
-
-        const config: Partial<EnvironmentConfig> = {};
-
-        // Parse .env file
-        envFile.split('\n').forEach(line => {
-            const trimmedLine = line.trim();
-            if (trimmedLine && !trimmedLine.startsWith('#')) {
-                const [key, ...valueParts] = trimmedLine.split('=');
-                if (key && valueParts.length > 0) {
-                    const value = valueParts.join('=').replace(/^["'](.*)["']$/, '$1');
-                    (config as any)[key.trim()] = value.trim();
-                }
-            }
-        });
-
-        // Fallback to process.env if not found in .env file
-        const GEMINI_API_KEY = config.GEMINI_API_KEY || process.env.GEMINI_API_KEY;
-
-        if (!GEMINI_API_KEY) {
-            throw new Error('GEMINI_API_KEY not found in .env file or environment variables');
-        }
-
-        return { GEMINI_API_KEY };
-    } catch (error) {
-        // If .env file doesn't exist, try environment variables
-        const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-
-        if (!GEMINI_API_KEY) {
-            console.error('❌ Environment configuration error:');
-            console.error('Please create a .env file in the project root with:');
-            console.error('GEMINI_API_KEY=your_api_key_here');
+        // Check if config file exists
+        if (!existsSync(configPath)) {
+            console.error('❌ Configuration not found!');
             console.error('');
-            console.error('Or set the GEMINI_API_KEY environment variable.');
+            console.error('Please run the initialization command first:');
+            console.error('  npx commit-commander init');
+            console.error('  or');
+            console.error('  cc init');
+            console.error('');
+            console.error('This will create a commit-commander.config.js file with your settings.');
             process.exit(1);
         }
 
-        return { GEMINI_API_KEY };
+        // Use dynamic import for ESM config file - convert Windows path to file:// URL
+        const configUrl = process.platform === 'win32'
+            ? `file:///${configPath.replace(/\\/g, '/')}`
+            : configPath;
+        const configModule = await import(configUrl);
+        const config = configModule.default;
+
+        // Validate required fields
+        if (!config.apiKey) {
+            console.error('❌ API key not found in configuration!');
+            console.error('Please edit commit-commander.config.js and add your Gemini API key.');
+            process.exit(1);
+        }
+
+        if (!config.commitTypes || !Array.isArray(config.commitTypes) || config.commitTypes.length === 0) {
+            console.log('⚠️ No commit types found, using defaults...');
+            config.commitTypes = [
+                '⭐feat', '🐛fix', '📝docs', '💅style', '♻️refactor',
+                '⚡perf', '🧪test', '📦build', '👷ci', '🔧chore',
+                '↩️revert', '🚧wip', '🎉release', '🔄deps', '🔄other'
+            ];
+        }
+
+        if (!config.scopeTypes || !Array.isArray(config.scopeTypes) || config.scopeTypes.length === 0) {
+            console.log('⚠️ No scope types found, using defaults...');
+            config.scopeTypes = ['🏠root', '🔄utils', '🔄other'];
+        }
+
+        // Fix invalid detailsPrompt values
+        if (config.customQuestions) {
+            if (config.customQuestions.detailsPrompt) {
+                const prompt = config.customQuestions.detailsPrompt.trim();
+                if (prompt === 'n' || prompt === 'no' || prompt === 'none' || prompt === '') {
+                    console.log('⚠️ Invalid details prompt found, using default...');
+                    config.customQuestions.detailsPrompt = 'Enter detailed description (optional): ';
+                }
+            } else {
+                // If detailsPrompt is missing, add default
+                config.customQuestions.detailsPrompt = 'Enter detailed description (optional): ';
+            }
+        } else {
+            // If customQuestions is missing entirely, add defaults
+            config.customQuestions = {
+                askForDetails: true,
+                detailsPrompt: 'Enter detailed description (optional): ',
+                confirmBeforeCommit: true
+            };
+        }
+
+        return config;
+
+    } catch (error) {
+        console.error('❌ Failed to load configuration:', error instanceof Error ? error.message : String(error));
+        console.error('');
+        console.error('Try running: npx commit-commander init');
+        process.exit(1);
     }
 }
 
-export const config = loadEnvironmentConfig();
+export const config = await loadConfig();

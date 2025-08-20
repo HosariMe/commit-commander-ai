@@ -1,29 +1,35 @@
 // src/utils/ai-helper.ts
 import https from 'https';
-import { COMMIT_TYPES } from '../constants/commit_types.js';
-import { SCOPE_TYPES } from '../constants/scope_types.js';
 import { config } from '../config/env.js';
 
 
 export async function generateCommitSuggestion(gitDiff: string): Promise<string> {
-    const prompt = `Based on these git changes, suggest a conventional commit message with emojis in this exact format: "emoji type(scope): description"
+    const basePrompt = `Based on the provided git changes, analyze the code changes and suggest a conventional commit message in this EXACT format: "commit_type(scope): description"
 
 Git changes:
 ${gitDiff}
 
-Rules:
-- emoji: appropriate emoji for the type (✨feat, 🐛fix, 📚docs, 💅style, ♻️refactor, ⚡perf, 🧪test, 📦build, 👷ci, 🔧chore)
-- type: ${COMMIT_TYPES.join(', ')}
-- scope: ${SCOPE_TYPES.join(', ')}
-- description: brief description (max 50 chars)
+STRICT RULES - You MUST follow exactly:
+- commit_type: MUST be EXACTLY one of these (copy exactly with emoji): ${config.commitTypes.join(' | ')}
+- scope: MUST be EXACTLY one of these (copy exactly with emoji): ${config.scopeTypes.join(' | ')}
+- description: brief, clear description of what was changed (max 50 chars)
 
-Response format: "emoji type(scope): description"
+Response format: "commit_type(scope): description"
 
-Examples:
-- "✨feat(auth): add user login functionality"
-- "🐛fix(api): resolve authentication error"  
-- "📚docs(readme): update installation guide"
-- "♻️refactor(utils): improve code structure"`;
+CRITICAL INSTRUCTIONS:
+1. Use the EXACT commit types with their emojis from the list above
+2. Use the EXACT scopes with their emojis from the list above  
+3. Do NOT create new commit types or scopes
+4. Do NOT add extra emojis
+5. Analyze the git diff to choose the most appropriate commit type and scope
+6. Keep description concise and descriptive
+
+Only respond with the commit message in the exact format requested.`;
+
+    // Add custom prompt if provided
+    const prompt = config.customPrompt
+        ? `${basePrompt}\n\nADDITIONAL INSTRUCTIONS:\n${config.customPrompt}`
+        : basePrompt;
 
     const data = JSON.stringify({
         contents: [
@@ -46,7 +52,7 @@ Examples:
             path: `/v1beta/models/gemini-2.0-flash:generateContent`,
             method: 'POST',
             headers: {
-                'X-goog-api-key': config.GEMINI_API_KEY,
+                'X-goog-api-key': config.apiKey,
                 'Content-Type': 'application/json',
                 'Content-Length': Buffer.byteLength(data)
             }
