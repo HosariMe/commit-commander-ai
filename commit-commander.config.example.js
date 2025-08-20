@@ -26,13 +26,13 @@ module.exports = {
 
     // Available scope types (with emojis)  
     scopeTypes: [
-        '🏠root',       // root/main changes
-        '🔄utils',      // utility functions
-        '🎨ui',         // user interface
-        '🛠️api',        // API changes
-        '📚docs',       // documentation
-        '🔧config',     // configuration
-        '🔄other'       // other scopes
+        'root',       // root/main changes
+        'utils',      // utility functions
+        'ui',         // user interface
+        'api',        // API changes
+        'docs',       // documentation
+        'config',     // configuration
+        'other'       // other scopes
     ],
 
     // Custom AI prompt instructions (optional)

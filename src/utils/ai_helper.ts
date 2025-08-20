@@ -11,7 +11,7 @@ ${gitDiff}
 
 STRICT RULES - You MUST follow exactly:
 - commit_type: MUST be EXACTLY one of these (copy exactly with emoji): ${config.commitTypes.join(' | ')}
-- scope: MUST be EXACTLY one of these (copy exactly with emoji): ${config.scopeTypes.join(' | ')}
+- scope: MUST be EXACTLY one of these : ${config.scopeTypes.join(' | ')}
 - description: brief, clear description of what was changed (max 50 chars)
 
 Response format: "commit_type(scope): description"

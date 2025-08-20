@@ -6,7 +6,7 @@
 .env.production.local
 
 # Commit Commander configuration (contains API key)
-commit-commander.config.js
+commit-commander.config.mjs
 
 # Dependencies
 node_modules/

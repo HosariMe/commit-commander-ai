@@ -45,7 +45,7 @@ This will:
 - Ask for your Gemini API key
 - Set up commit types and scopes
 - Configure custom questions
-- Create a `commit-commander.config.js` file
+- Create a `commit-commander.config.mjs` file
 
 ### 2. Get Your Gemini API Key
 
@@ -64,10 +64,10 @@ npx cc
 
 ## ⚙️ Configuration
 
-The `commit-commander.config.js` file allows full customization:
+The `commit-commander.config.mjs` file allows full customization:
 
 ```javascript
-module.exports = {
+export default {
     // Your Gemini API Key
     apiKey: 'your_api_key_here',
 
@@ -87,10 +87,10 @@ module.exports = {
 
     // Available scope types (with emojis)  
     scopeTypes: [
-        '🏠root',       // root changes
-        '🔄utils',      // utilities
-        '🎨ui',         // user interface
-        '🛠️api'        // API changes
+        'root',       // root changes
+        'utils',      // utilities
+        'ui',         // user interface
+        'api'        // API changes
     ],
 
     // Custom AI prompt (optional)
@@ -171,7 +171,7 @@ Default commit types with emojis:
 
 ## 🔒 Security
 
-- Configuration file (`commit-commander.config.js`) is automatically added to `.gitignore`
+- Configuration file (`commit-commander.config.mjs`) is automatically added to `.gitignore`
 - API keys are stored locally and never shared
 - Works completely offline after initial setup
 

@@ -21,7 +21,7 @@ export async function initializeConfig(): Promise<void> {
     console.log('🚀 Welcome to Commit Commander Setup!');
     console.log('Let\'s configure your AI-powered commit assistant.\n');
 
-    const configPath = join(process.cwd(), 'commit-commander.config.js');
+    const configPath = join(process.cwd(), 'commit-commander.config.mjs');
 
     // Check if config already exists
     if (existsSync(configPath)) {
@@ -76,10 +76,10 @@ export async function initializeConfig(): Promise<void> {
         // Fallback to defaults if user provided empty input
         if (scopeTypes.length === 0) {
             console.log('📦 No custom scopes provided, using defaults...');
-            scopeTypes = ['🏠root', '🔄utils', '🔄other'];
+            scopeTypes = ['root', 'utils', 'other'];
         }
     } else {
-        scopeTypes = ['🏠root', '🔄utils', '🔄other'];
+        scopeTypes = ['root', 'utils', 'other'];
     }
 
     console.log('\n💬 Custom AI Prompt (optional):');
@@ -150,7 +150,7 @@ export default {
         console.log('\n✅ Configuration saved successfully!');
         console.log(`📁 Config file created: ${configPath}`);
         console.log('\n🎯 Next steps:');
-        console.log('1. Add commit-commander.config.js to your .gitignore (contains API key)');
+        console.log('1. Add commit-commander.config.mjs to your .gitignore (contains API key)');
         console.log('2. Run "npx commit-commander-ai" or "cc" to start using it');
         console.log('3. You can edit the config file anytime to customize further');
         console.log('\n🚀 Happy committing!');

@@ -1,6 +1,6 @@
 {
   "name": "commit-commander-ai",
-  "version": "1.0.1",
+  "version": "1.0.22",
   "description": "A powerful CLI tool that helps developers create professional and meaningful Git commits with intelligent suggestions and conventional commit standards",
   "keywords": [
     "git",

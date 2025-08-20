@@ -15,7 +15,7 @@ interface CommitCommanderConfig {
 }
 
 async function loadConfig(): Promise<CommitCommanderConfig> {
-    const configPath = join(process.cwd(), 'commit-commander.config.js');
+    const configPath = join(process.cwd(), 'commit-commander.config.mjs');
 
     try {
         // Check if config file exists
@@ -27,11 +27,11 @@ async function loadConfig(): Promise<CommitCommanderConfig> {
             console.error('  or');
             console.error('  cc init');
             console.error('');
-            console.error('This will create a commit-commander.config.js file with your settings.');
+            console.error('This will create a commit-commander.config.mjs file with your settings.');
             process.exit(1);
         }
 
-        // Use dynamic import for ESM config file - convert Windows path to file:// URL
+        // Use dynamic import for .mjs config file - convert Windows path to file:// URL
         const configUrl = process.platform === 'win32'
             ? `file:///${configPath.replace(/\\/g, '/')}`
             : configPath;
@@ -41,7 +41,7 @@ async function loadConfig(): Promise<CommitCommanderConfig> {
         // Validate required fields
         if (!config.apiKey) {
             console.error('❌ API key not found in configuration!');
-            console.error('Please edit commit-commander.config.js and add your Gemini API key.');
+            console.error('Please edit commit-commander.config.mjs and add your Gemini API key.');
             process.exit(1);
         }
 
@@ -56,7 +56,7 @@ async function loadConfig(): Promise<CommitCommanderConfig> {
 
         if (!config.scopeTypes || !Array.isArray(config.scopeTypes) || config.scopeTypes.length === 0) {
             console.log('⚠️ No scope types found, using defaults...');
-            config.scopeTypes = ['🏠root', '🔄utils', '🔄other'];
+            config.scopeTypes = ['root', 'utils', 'other'];
         }
 
         // Fix invalid detailsPrompt values
