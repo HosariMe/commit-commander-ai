@@ -37,10 +37,10 @@ async function main() {
 
 function showHelp() {
   console.log(`
-🚀 Commit Commander - AI-Powered Git Commits
+🚀 Commit Commander AI - AI-Powered Git Commits
 
 USAGE:
-  commit-commander [command]
+  commit-commander-ai [command]
   cc [command]
 
 COMMANDS:
@@ -50,9 +50,9 @@ COMMANDS:
   (no command)         Start the commit process
 
 EXAMPLES:
-  cc init             # Initialize commit-commander in your project
+  cc init             # Initialize commit-commander-ai in your project
   cc                  # Create a commit with AI assistance
-  commit-commander    # Same as above
+  commit-commander-ai # Same as above
 
 CONFIGURATION:
   After running 'init', edit commit-commander.config.js to customize:
@@ -67,7 +67,7 @@ More info: https://github.com/hosseinnaseriir/commit-commander
 
 function showVersion() {
   // In a real package, you'd import this from package.json
-  console.log(`commit-commander v${version}`);
+  console.log(`commit-commander-ai v${version}`);
 }
 
 main().catch((error) => {

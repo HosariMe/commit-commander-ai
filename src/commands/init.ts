@@ -1,4 +1,4 @@
-// Initialize commit-commander configuration
+// Initialize commit-commander-ai configuration
 import { writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { askQuestion } from '../utils/ask.js';
@@ -151,7 +151,7 @@ export default {
         console.log(`📁 Config file created: ${configPath}`);
         console.log('\n🎯 Next steps:');
         console.log('1. Add commit-commander.config.js to your .gitignore (contains API key)');
-        console.log('2. Run "npx commit-commander" or "cc" to start using it');
+        console.log('2. Run "npx commit-commander-ai" or "cc" to start using it');
         console.log('3. You can edit the config file anytime to customize further');
         console.log('\n🚀 Happy committing!');
     } catch (error) {

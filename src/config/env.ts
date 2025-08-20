@@ -23,7 +23,7 @@ async function loadConfig(): Promise<CommitCommanderConfig> {
             console.error('❌ Configuration not found!');
             console.error('');
             console.error('Please run the initialization command first:');
-            console.error('  npx commit-commander init');
+            console.error('  npx commit-commander-ai init');
             console.error('  or');
             console.error('  cc init');
             console.error('');
@@ -85,7 +85,7 @@ async function loadConfig(): Promise<CommitCommanderConfig> {
     } catch (error) {
         console.error('❌ Failed to load configuration:', error instanceof Error ? error.message : String(error));
         console.error('');
-        console.error('Try running: npx commit-commander init');
+        console.error('Try running: npx commit-commander-ai init');
         process.exit(1);
     }
 }

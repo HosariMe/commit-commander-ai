@@ -1,4 +1,4 @@
-# 🚀 Commit Commander
+# 🚀 Commit Commander AI
 
 AI-powered Git commit assistant that helps you create professional, meaningful commit messages with ease.
 
@@ -16,17 +16,17 @@ AI-powered Git commit assistant that helps you create professional, meaningful c
 ### As a Dev Dependency (Recommended)
 
 ```bash
-npm install --save-dev commit-commander
+npm install --save-dev commit-commander-ai
 # or
-yarn add --dev commit-commander
+yarn add --dev commit-commander-ai
 # or
-pnpm add --save-dev commit-commander
+pnpm add --save-dev commit-commander-ai
 ```
 
 ### Global Installation
 
 ```bash
-npm install -g commit-commander
+npm install -g commit-commander-ai
 ```
 
 ## 🚀 Quick Start
@@ -36,9 +36,9 @@ npm install -g commit-commander
 After installation, initialize the configuration in your project:
 
 ```bash
-npx commit-commander init
+npx commit-commander-ai init
 # or if installed globally
-commit-commander init
+commit-commander-ai init
 ```
 
 This will:
@@ -57,7 +57,7 @@ This will:
 ### 3. Start Using It
 
 ```bash
-npx commit-commander
+npx commit-commander-ai
 # or use the short alias
 npx cc
 ```
@@ -123,7 +123,7 @@ Add to your `package.json`:
 ```json
 {
   "scripts": {
-    "commit": "commit-commander",
+    "commit": "commit-commander-ai",
     "c": "cc"
   }
 }
@@ -140,10 +140,10 @@ npm run c
 
 | Command | Alias | Description |
 |---------|-------|-------------|
-| `commit-commander` | `cc` | Start commit process |
-| `commit-commander init` | `cc init` | Initialize configuration |
-| `commit-commander help` | `cc help` | Show help |
-| `commit-commander version` | `cc --version` | Show version |
+| `commit-commander-ai` | `cc` | Start commit process |
+| `commit-commander-ai init` | `cc init` | Initialize configuration |
+| `commit-commander-ai help` | `cc help` | Show help |
+| `commit-commander-ai version` | `cc --version` | Show version |
 
 ## 🤖 AI Features
 
@@ -185,7 +185,7 @@ MIT © [Hossein Naseri](https://github.com/hosseinnaseriir)
 
 ## 🙋‍♂️ Support
 
-- 📧 Email: hossein.develop@gmail.com  
+- 📧 Email: naseri.develop@gmail.com  
 - 🐛 Issues: [GitHub Issues](https://github.com/hosseinnaseriir/commit-commander/issues)
 - 💡 Features: [GitHub Discussions](https://github.com/hosseinnaseriir/commit-commander/discussions)
 

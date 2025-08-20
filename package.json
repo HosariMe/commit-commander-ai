@@ -1,6 +1,6 @@
 {
-  "name": "commit-commander",
-  "version": "1.0.0",
+  "name": "commit-commander-ai",
+  "version": "1.0.1",
   "description": "A powerful CLI tool that helps developers create professional and meaningful Git commits with intelligent suggestions and conventional commit standards",
   "keywords": [
     "git",
@@ -15,7 +15,7 @@
   "license": "MIT",
   "author": {
     "name": "Hossein Naseri",
-    "email": "hossein.develop@gmail.com"
+    "email": "naseri.develop@gmail.com"
   },
   "repository": {
     "type": "git",
