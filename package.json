@@ -1,0 +1,52 @@
+{
+  "name": "commit-commander",
+  "version": "1.0.0",
+  "description": "A powerful CLI tool that helps developers create professional and meaningful Git commits with intelligent suggestions and conventional commit standards",
+  "keywords": [
+    "git",
+    "commit",
+    "cli",
+    "conventional-commits",
+    "developer-tools",
+    "commit-message",
+    "git-hooks",
+    "semantic-commits"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Hossein Naseri",
+    "email": "hossein.develop@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hosseinnaseriir/commit-commander.git"
+  },
+  "homepage": "https://github.com/hosseinnaseriir/commit-commander#readme",
+  "bugs": {
+    "url": "https://github.com/hosseinnaseriir/commit-commander/issues"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "commit-commander": "dist/cli.js",
+    "cc": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "node dist/test.js"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "typescript": "^5.9.2"
+  }
+}
