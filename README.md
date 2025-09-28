@@ -181,13 +181,13 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
 
-MIT © [Hossein Naseri](https://github.com/hosseinnaseriir)
+MIT © [Hosari](https://github.com/HosariMe)
 
 ## 🙋‍♂️ Support
 
-- 📧 Email: naseri.develop@gmail.com  
-- 🐛 Issues: [GitHub Issues](https://github.com/hosseinnaseriir/commit-commander/issues)
-- 💡 Features: [GitHub Discussions](https://github.com/hosseinnaseriir/commit-commander/discussions)
+- 📧 Email: hosari.me@gmail.com  
+- 🐛 Issues: [GitHub Issues](https://github.com/HosariMe/commit-commander/issues)
+- 💡 Features: [GitHub Discussions](https://github.com/HosariMe/commit-commander/discussions)
 
 ---
 
